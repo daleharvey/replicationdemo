@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8" />
+    <title>Replication Demo</title>
+    <link rel="stylesheet" href="css/main.css">
+
+  </head>
+
+  <body>
+
+    <div class="wrapper" data-db="replicationdemo">
+      <h2>replicationdemo</h2>
+      <div id="replicationdemo_view"></div>
+      <footer>
+        <p>click on a conflict below to delete it</p>
+        <div id="replicationdemo_conflicts" class="conflicts">&nbsp;</div>
+        <div style="margin:10px;">
+          <button class="replicate">replicate &gt;</button>
+          <br /><br />
+          <form class="entry_form" action="#">
+            <input type="text" name="id" placeholder="Id" />
+            <input type="text" name="color" placeholder="color" class="color" />
+            <input type="reset">
+            <input type="submit" class="add" value="Save"/>
+            <unput type="hidden" name="rev" />
+          </form>
+          <br /><br />
+          <button class="clear">Clear All</button>
+          <button class="delete">Delete Database</button>
+        </div>
+      </footer>
+    </div>
+
+    <div class="wrapper right" data-db="minion">
+      <h2>Minion</h2>
+      <div id="minion_view"></div>
+      <footer>
+        <p>click on a conflict below to delete it</p>
+        <div id="minion_conflicts" class="conflicts">&nbsp;</div>
+        <div style="margin:10px;">
+          <button class="replicate">&lt; replicate</button>
+          <br /><br />
+          <form class="entry_form" action="#">
+            <input type="text" name="id" placeholder="Id" />
+            <input type="text" name="color" placeholder="color" class="color" />
+            <input type="reset">
+            <input type="submit" class="add" value="Save"/>
+            <unput type="hidden" name="rev" />
+          </form>
+          <br /><br />
+          <button class="clear">Clear All</button>
+          <button class="delete">Delete Database</button>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/html" id="list_tpl">
+      <ul class="square_view">
+        {{#rows}}
+        <li data-color="{{color}}" data-id="{{_id}}" data-rev="{{_rev}}"
+            {{#_conflicts}}data-conflicts="true"{{/_conflicts}}>
+          {{#_conflicts}}<a class="conflict">!</a>{{/_conflicts}}
+          <div style="background:#{{color}}"></div>
+          {{_id}}
+        </li>
+        {{/rows}}
+      </ul>
+    </script>
+
+  </body>
+
+  <script src="./jscolor/jscolor.js"></script>
+  <script src="./js/jquery-1.6.min.js"></script>
+  <script src="./js/jquery.couch.js"></script>
+  <script src="./js/mustache.js "></script>
+  <script src="./js/replicationdemo.js"></script>
+
+</html>
